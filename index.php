@@ -5,9 +5,9 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $statement = $pdo->prepare('SELECT * FROM products ORDER BY create_date DESC');
 $statement->execute();
 $product= $statement->fetchAll(PDO::FETCH_ASSOC);
-echo '<pre>';
-var_dump($product);
-echo '</pre>'
+// echo '<pre>';
+// var_dump($product);
+// echo '</pre>'
 
 
 
@@ -34,9 +34,14 @@ echo '</pre>'
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Image</th>
+                <th scope="col">Title</th>
+                <th scope="col">Price</th>
+                <th scope="col">Create Date</th>
+                <th scope="col">Action</th>
+
+
+
             </tr>
         </thead>
         <tbody>
