@@ -25,51 +25,29 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 <body>
     <h1>CREATE NEW PRODUCTS</h1>
 
-    <p>
-       <a href="create.php"> <button class="btn btn-success"> Create Product</button> </a>
-    </p>
+    <form>
+  
+  <div class="mb-3">
+    <label> Product Title </label>
+    <input type="text" class="form-control" >
+  </div>
+  <div class="mb-3">
+    <label> Product Description </label>
+    <textarea class="form-control" > </textarea>
+  </div>
+  <div class="mb-3">
+    <label> Product Price </label>
+    <input type="number" step=".01" class="form-control" >
+  </div>
+  <div class="mb-3">
+    <label> Product Image </label> <br>
+    <input type="file" >
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Image</th>
-                <th scope="col">Title</th>
-                <th scope="col">Price</th>
-                <th scope="col">Create Date</th>
-                <th scope="col">Action</th>
-
-
-
-            </tr>
-        </thead>
-        <tbody>
-            <?php  foreach($products as $i=> $product):     ?>
-                <tr>
-                <th scope="row"><?php  echo $i + 1 ?></th>
-                <td>    </td>
-                <td><?php  echo $product['title']  ?></td>
-                <td><?php  echo $product['price']  ?></td>
-                <td><?php  echo $product['create_date']  ?></td>
-                <td><?php  echo $product['title']  ?></td>
-                <td>    
-                    <button type="button" class="btn btn-sm btn-outline-primary"> Edit</button>
-                    <button type="button" class="btn btn-sm btn-outline-danger"> Delete</button>
-
-                </td>
-
-
-
-
-
-               
-            </tr>
-
-         <?php   endforeach;  ?>
-      
-        </tbody>
-    </table>
-
+   
 
 </body>
 
