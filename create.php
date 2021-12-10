@@ -46,7 +46,7 @@ if(empty($errors)) {
 
 $image = $_FILES['image'] ?? null;
 $imagePath ='';
-if ($image) {
+if ($image && $image['tmp_name']) {
     $imagePath = 'images/'.randomString(8).'/'.$image['name'];
     mkdir(dirname($imagePath));
 

@@ -2,9 +2,11 @@
 
 $pdo = new PDO('mysql:host=localhost;port=3306;dbname=products_crud', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
 $statement = $pdo->prepare('SELECT * FROM products ORDER BY create_date DESC');
 $statement->execute();
-$products= $statement->fetchAll(PDO::FETCH_ASSOC);
+$products = $statement->fetchAll(PDO::FETCH_ASSOC);
 // echo '<pre>';
 // var_dump($product);
 // echo '</pre>'
@@ -31,7 +33,7 @@ $products= $statement->fetchAll(PDO::FETCH_ASSOC);
     <h1>PRODUCTS CRUD</h1>
 
     <p>
-       <a href="create.php"> <button class="btn btn-success"> Create Product</button> </a>
+        <a href="create.php"> <button class="btn btn-success"> Create Product</button> </a>
     </p>
 
     <table class="table">
@@ -42,6 +44,7 @@ $products= $statement->fetchAll(PDO::FETCH_ASSOC);
                 <th scope="col">Title</th>
                 <th scope="col">Price</th>
                 <th scope="col">Create Date</th>
+                <th scope="col">Description</th>
                 <th scope="col">Action</th>
 
 
@@ -49,29 +52,37 @@ $products= $statement->fetchAll(PDO::FETCH_ASSOC);
             </tr>
         </thead>
         <tbody>
-            <?php  foreach($products as $i=> $product):     ?>
+            <?php foreach ($products as $i => $product) :     ?>
                 <tr>
-                <th scope="row"><?php  echo $i + 1 ?></th>
-                <td>    </td>
-                <td><?php  echo $product['title']  ?></td>
-                <td><?php  echo $product['price']  ?></td>
-                <td><?php  echo $product['create_date']  ?></td>
-                <td><?php  echo $product['image']  ?></td>
-                <td>    
-                    <button type="button" class="btn btn-sm btn-outline-primary"> Edit</button>
-                    <button type="button" class="btn btn-sm btn-outline-danger"> Delete</button>
+                    <th scope="row"><?php echo $i + 1 ?></th>
+                    <td> <img src="<?php echo $product['image'] ?>" alt="" class="thumb-img"> </td>
+                    <td><?php echo $product['title']  ?></td>
+                    <td><?php echo $product['price']  ?></td>
+                    <td><?php echo $product['create_date']  ?></td>
+                    <td><?php echo $product['description']  ?></td>
 
-                </td>
+                    <!-- <td>  ?></td> -->
+                    <td>
+                        <button type="button" class="btn btn-sm btn-outline-primary"> Edit</button>
+
+                        <form action="delete.php" method="post" style="display: inline-block;">
+                            <input type="hidden" name="id" value="<?php echo $product['id']?>">
+                            <button type="submit" class="btn btn-sm btn-outline-danger"> Delete</button>
+                        </form>
+
+
+
+                    </td>
 
 
 
 
 
-               
-            </tr>
 
-         <?php   endforeach;  ?>
-      
+                </tr>
+
+            <?php endforeach;  ?>
+
         </tbody>
     </table>
 
