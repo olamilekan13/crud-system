@@ -36,6 +36,13 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
         <a href="create.php"> <button class="btn btn-success"> Create Product</button> </a>
     </p>
 
+    <form action="">
+    <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="search for products" name="search">
+  <button class="btn btn-outline-secondary" type="submit">search</button>
+</div>
+    </form>
+
     <table class="table">
         <thead>
             <tr>

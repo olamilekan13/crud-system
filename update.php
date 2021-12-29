@@ -28,9 +28,10 @@ $product= $statement-> fetch(PDO::FETCH_ASSOC);
 
 $errors = [];
 
-$title = '';
-$description = '';
-$price= '';
+$title = $product['title'];
+
+$description = $product['description'];
+$price= $product['price'];
 
 
 //collecting the inputs from the user and saving it in the database
@@ -38,7 +39,7 @@ if($_SERVER['REQUEST_METHOD'] ==='POST'){
 $title = $_POST['title'];
 $description = $_POST['description'];
 $price = $_POST['price'];
-$date = date('Y-m-d H:i:s');
+// $date = date('Y-m-d H:i:s');
 
 
 
@@ -61,11 +62,23 @@ if (!is_dir('images'))
 }
 
 
+
 if(empty($errors)) {
 
 $image = $_FILES['image'] ?? null;
-$imagePath ='';
+$imagePath =  $product['image'];
+
+
 if ($image && $image['tmp_name']) {
+
+
+    // if an image is selected, it should be deleted
+
+if($product['image']){
+    unlink($product['image']);
+}
+
+
     $imagePath = 'images/'.randomString(8).'/'.$image['name'];
     mkdir(dirname($imagePath));
 
@@ -74,14 +87,14 @@ if ($image && $image['tmp_name']) {
 
 }
 
-$statement =$pdo->prepare("INSERT INTO products (title,  image, description, price, create_date)
-            VALUES (:title, :image, :description, :price, :date)");
+$statement =$pdo->prepare("UPDATE products SET title =:title,  image = :image,
+                            description= :description, price = :price WHERE id = :id");
 
 $statement->bindValue(':title', $title);
 $statement->bindValue(':image', $imagePath);
 $statement->bindValue(':description', $description);
 $statement->bindValue(':price', $price);
-$statement->bindValue(':date', $date);
+$statement->bindValue(':id', $id);
 $statement->execute();
 header('Location: index.php');
 }
@@ -124,7 +137,7 @@ function randomString($n)
     <a href="index.php" class="btn btn-danger"> GO Back to Product</a>
 </p>
 
-    <h1>CREATE NEW PRODUCTS</h1>
+    <h1>UPDATE PRODUCTS  <b><?php echo $product['title']  ?></b></h1>
 
     <?php if (!empty($errors)):     ?>
 
