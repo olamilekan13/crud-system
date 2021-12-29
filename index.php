@@ -46,7 +46,7 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-    <h1>PRODUCTS CRUD</h1>
+   <a href=""> <h1>PRODUCTS CRUD</h1> </a>
 
     <p>
         <a href="create.php"> <button class="btn btn-success"> Create Product</button> </a>
@@ -55,9 +55,10 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
     <form action="">
     <div class="input-group mb-3">
   <input type="text" class="form-control" placeholder="search for products" name="search">
-  <button class="btn btn-outline-secondary" type="submit">search</button>
+  <button class="btn btn-outline-secondary" type="submit" value="<?php echo $search  ?>">search</button>
 </div>
     </form>
+    
 
     <table class="table">
         <thead>
